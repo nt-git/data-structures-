@@ -15,6 +15,10 @@ def unique_houses(filename):
     """
     the_file = open(filename)
     houses = set()
+    # houses = {'Gryffindor'}
+    # houses = set(['Gryffindor'])
+
+
     for line in the_file:
         student = line.split("|")
         house = student[2]
@@ -48,10 +52,9 @@ def sort_by_cohort(filename):
     for line in the_file:
         line = line.rstrip()
         student = line.split("|")
+        # student = line.rstrip().split("|")
         cohort = student[4]
-        
         name = student[0] + " " + student[1]
-       
         if cohort == "Winter 2016":
             winter_16.append(name)
 
@@ -66,10 +69,7 @@ def sort_by_cohort(filename):
 
         elif cohort == "G":
             ghosts.append(name)
-       
     all_students = [fall_15, winter_16, spring_16, summer_16, ghosts]
-
-
 
     return all_students
 
@@ -87,8 +87,6 @@ def hogwarts_by_house(filename):
     [['Abercrombie', 'Bell', 'Brown', 'Coote', 'Finnigan', 'Granger', 'Johnson', 'Jordan', 'Kirke', 'Longbottom', 'Macdonald', 'McDonald', 'McLaggen', 'Patil', 'Peakes', 'Potter', 'Robins', 'Sloper', 'Thomas', 'Vane', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Weasley', 'Wood'], ['Baddock', 'Bletchley', 'Bullstrode', 'Crabbe', 'Flint', 'Goyle', 'Higgs', 'Malfoy', 'Parkinson', 'Pritchard', 'Pucey', 'Zabini'], ['Bones', 'Branstone', 'Cauldwell', 'Diggory', 'Finch-Fletchley', 'Macmillan', 'Madley', 'Midgeon', 'Smith', 'Whitby', 'Zeller'], ['Ackerley', 'Belby', 'Boot', 'Brocklehurst', 'Carmichael', 'Clearwater', 'Corner', 'Davies', 'Goldstein', 'Lovegood', 'Patil', 'Quirke', 'Turpin'], ['Abbott', 'Chang', 'Creevey', 'Creevey', 'Edgecombe', 'Nott', 'Spinnet'], ['Baron', 'Friar', 'Lady', 'Nick'], ['Flitwick', 'McGonagall', 'Snape', 'Sprout']]
 
     """
-
-    all_students = []
     gryffindor = []
     hufflepuff = []
     slytherin = []
@@ -97,8 +95,42 @@ def hogwarts_by_house(filename):
     ghosts = []
     instructors = []
 
-    # Code goes here
+    the_file = open(filename)
+    for line in the_file:
 
+        student = line.rstrip().split("|")
+        house = student[2]
+        name = student[1]
+        title = student[4]
+
+        if house == "Gryffindor":
+            gryffindor.append(name)
+        elif house == "Hufflepuff":
+            hufflepuff.append(name)
+        elif house == "Slytherin":
+            slytherin.append(name)
+        elif house == "Dumbledore's Army":
+            dumbledores_army.append(name)
+        elif house == "Ravenclaw":
+            ravenclaw.append(name)
+        if title == "G":
+            ghosts.append(name)
+        elif title == "I":
+            instructors.append(name)
+
+    all_students = [gryffindor,
+                    hufflepuff,
+                    slytherin,
+                    dumbledores_army,
+                    ravenclaw,
+                    ghosts,
+                    instructors]
+
+    # for group in all_students:
+    #     group.sort()
+    
+    all_students.sort()
+    
     return all_students
 
 
